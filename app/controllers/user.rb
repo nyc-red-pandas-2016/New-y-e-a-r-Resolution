@@ -7,7 +7,7 @@ post '/users/new' do
   @message = "Accout Successfully Created!"
   if user.save
     session[:user_id]= user.id
-    erb :'index'
+    redirect '/'
   else
     @errors = user.errors.full_messages
     erb :'/users/register'
@@ -22,7 +22,7 @@ post '/users/login' do
   @user= User.find_by(email: params[:user][:email])
   if @user && @user.authenticate(params[:user][:password])
     session[:user_id]= @user.id
-    erb :'index'
+    redirect '/'
   else
     @errors= ["Cannot Log In With This Info"]
     erb :'users/login'
@@ -31,5 +31,5 @@ end
 
 get '/users/logout' do
   session.clear
-  erb :'index'
+  redirect '/'
 end

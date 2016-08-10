@@ -12,4 +12,14 @@ class Question < ActiveRecord::Base
     self.views += 1
     self.save
   end
+
+  def time_since_asked
+    start_time = self.create_at
+    total_seconds = Time.now - start_time
+    hours = (total_seconds/ 3600).to_i
+    minutes = ((total_seconds % 3600) / 60).to_i
+    seconds = ((total_seconds % 3600) % 60).to_i
+  end
+
+
 end

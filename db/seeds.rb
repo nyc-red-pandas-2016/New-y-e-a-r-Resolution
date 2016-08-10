@@ -25,3 +25,5 @@ QuestionTag.create!(question_tags)
 answers = [
   {question_id: 1, user_id: 4, text: "Well, what works for me... you gotta wait until your teeth are nice and dirty. Nothing like flossing after a good steak. And then I use my shoelaces."}, {question_id: 4, user_id: 1, text: "Look around and it will become apparent."}, {question_id: 4, user_id: 2, text: "Based on Sudoku and Flashcard completion rates, we could evaluate the Red Pandas in comparison to cohorts of similar demographics in the past three years and see where you rank up... all the best teams have me as a teacher ;)"}, {question_id: 3, user_id: 1, text: "Ask Gabe."}
 ]
+
+Answer.create!(answers)

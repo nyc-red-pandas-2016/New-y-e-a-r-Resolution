@@ -1,5 +1,5 @@
 get '/questions/:id' do
   @question = Question.find(params[:id])
 
-  "here in qiestion"
+  erb :'questions/show'
 end
