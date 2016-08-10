@@ -1,7 +1,7 @@
 <h1> New Year Resolutions </h1>
 
 <ul><% @questions.each do |q| %>
-  <li>Views: <%=q.views %> Answers: <%=q.answers.length %> Votes: <%=q.votes.reduce(:+) %> Asked:<a href="/questions/<%= q.id %>"><%= q.title %> </a> User: <%= q.user.username%><br>
+  <li>Views: <%=q.views %> Answers: <%=q.answers.length %> Votes: <%=q.count_votes %> Asked:<a href="/questions/<%= q.id %>"><%= q.title %> </a> User: <%= q.user.username%><br>
     <% q.tags.each do |tag| %>
       <%= tag.name %>
     <% end %>

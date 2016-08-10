@@ -50,3 +50,14 @@ post '/questions/:id/answers/new' do
 
 end
 
+get '/questions/:id/upvote' do
+  question = Question.find(params[:id])
+  question.votes.create(user_id: current_user, value: 1)
+  redirect "/questions/#{question.id}"
+end
+
+get '/questions/:id/downvote' do
+  question = Question.find(params[:id])
+  question.votes.create(user_id: current_user, value: -1)
+  redirect "/questions/#{question.id}"
+end

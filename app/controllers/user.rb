@@ -4,7 +4,7 @@ end
 
 post '/users/new' do
   user = User.new(params[:user])
-  @message = "Accout Successfully Created!"
+  @message = "Account Successfully Created!"
   if user.save
     session[:user_id]= user.id
     redirect '/'

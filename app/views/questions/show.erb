@@ -5,7 +5,9 @@
   <p> <%= @question.body %> </p>
 </div>
 <div>
-<!-- here is where upvoting downvoting functionality will go  -->
+  <a href="/questions/<%=@question.id%>/upvote">Upvote!</a>
+  <p>Current Votes: <%=@question.count_votes %></p>
+  <a href="/questions/<%=@question.id%>/downvote">Downvote!</a>
 </div>
 <h2> Comments on Question </h2>
 <h3> Add Comment </h3>
@@ -24,6 +26,11 @@
 <p> Total Answers <%= @answers.length %> </p>
 <% @answers.each do |answer| %>
   <p> <%= answer.text %> <%= answer.user.username%> </p>
+  <div>
+    <a href="/answers/<%=answer.id%>/upvote">Upvote!</a>
+    <p>Current Votes: <%=answer.count_votes %></p>
+    <a href="/answers/<%=answer.id%>/downvote">Downvote!</a>
+  </div>
   <p> Comments </p>
   <% answer.comments.each do |comment| %>
     <%= comment.text %>
