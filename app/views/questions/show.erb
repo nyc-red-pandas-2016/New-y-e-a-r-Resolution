@@ -1,1 +1,42 @@
-"asdf"
+<div>
+  <h1> <%= @question.title %> </h1>
+  <p> <%= @question.user.username%></p>
+  <br>
+  <p> <%= @question.body %> </p>
+</div>
+<div>
+<!-- here is where upvoting downvoting functionality will go  -->
+</div>
+<h2> Comments on Question </h2>
+<h3> Add Comment </h3>
+<form method="POST" action="/questions/<%= @question.id %>/comments/new">
+  <input type="text" name="text"> </input><br>
+  <input type="submit" value="Submit Comment">
+</form>
+<ul>
+  <% @question.comments.each do |comment| %>
+  <li><%=comment.text%></li>
+  <p> Author: <%= comment.user.username %> </p>
+  <% end %>
+</ul>
+<hr>
+<h2> Answers to Question </h2>
+<p> Total Answers <%= @answers.length %> </p>
+<% @answers.each do |answer| %>
+  <p> <%= answer.text %> <%= answer.user.username%> </p>
+  <p> Comments </p>
+  <% answer.comments.each do |comment| %>
+    <%= comment.text %>
+    <p> Author: <%= comment.user.username%> </p>
+  <% end %>
+  <h3> Add Comment </h3>
+  <form method="POST" action="/answers/<%= answer.id %>/comments/new">
+    <input type="text" name="text"> </input><br>
+    <input type="submit" value="Submit Comment">
+  </form>
+<% end %>
+<h2> Your Answer </h2>
+<form method="POST" action="/questions/<%= @question.id %>/answers/new">
+  <textarea rows="10" cols="50" name="text"> </textarea><br>
+  <input type="submit" value="Submit Answer">
+</form>
