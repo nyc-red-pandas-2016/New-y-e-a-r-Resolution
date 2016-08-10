@@ -20,9 +20,16 @@
 </head>
 <body>
   <nav>
-    <a href="/">Home</a>
-    <a href="/user/new">Sign Up</a>
-    <a href="/user/login">Log In</a>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <% if current_user %>
+        <li>Hello, <%= current_user_name %>!</li>
+        <li><a href="/users/logout">Logout</a></li>
+      <% else %>
+        <li><a href="/users/new">Register</a></li>
+        <li><a href="/users/login">Login</a></li>
+      <% end %>
+    </ul>
   </nav>
   <%= yield %>
 </body>
