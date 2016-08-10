@@ -7,4 +7,9 @@ class Question < ActiveRecord::Base
   has_many :votes, as: :votable
 
   validates :title, :body, presence: true
+
+  def add_view
+    self.views += 1
+    self.save
+  end
 end
