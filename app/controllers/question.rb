@@ -1,3 +1,24 @@
+get '/questions/create' do
+  erb :'/questions/create'
+end
+
+post '/questions/create' do
+  question = Question.new(params[:question])
+  tags= params[:tags].split(' ')
+  if tags.length > 0
+    tags.each do |tag|
+      question.tags.new(:name => tag)
+    end
+  end
+
+  if question.save
+    redirect '/'
+  else
+    @errors = questions.errors.full_messages
+    erb :'/questions/create'
+  end
+end
+
 get '/questions/:id' do
   @question = Question.find(params[:id])
   @answers = @question.answers
@@ -28,3 +49,4 @@ post '/questions/:id/answers/new' do
   end
 
 end
+

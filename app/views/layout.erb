@@ -23,8 +23,9 @@
     <ul>
       <li><a href="/">Home</a></li>
       <% if current_user %>
-        <li>Hello, <%= current_user_name %>!</li>
+        <li>Hello, <a href=""><%= current_user_name %>!</a></li>
         <li><a href="/users/logout">Logout</a></li>
+        <li><a href="/questions/create">Create A Question!</a></li>
       <% else %>
         <li><a href="/users/new">Register</a></li>
         <li><a href="/users/login">Login</a></li>
