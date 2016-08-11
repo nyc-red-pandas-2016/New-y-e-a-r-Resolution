@@ -13,16 +13,26 @@
 <ul>
   <% @answers.each do |answer| %>
     <% if answer.user_id== current_user %>
-      <li><a href="/questions/<%=answer.question_id%>"><%= answer.text %></a> <%=answer.created_at%></li>
+      <li><a href="/questions/<%=answer.question_id%>"><%= answer.text %></a> <a href="/answers/<%=answer.id%>/edit">Edit or Delete</a> <%=answer.created_at%></li>
     <% end %>
   <% end %>
 </ul>
 
-<h2> Comments </h2>
+<h2> Comments on Questions </h2>
 <ul>
 <% @comments.each do |comment| %>
-  <% if comment.user_id== current_user %>
-    <li><a href="/questions/<%=comment.commentable_id%>"><%= comment.text %></a> <%=comment.created_at%></li>
+  <% if comment.user_id == current_user && comment.commentable_type == "Question" %>
+    <li><a href="/questions/<%=comment.commentable_id%>"><%= comment.text %></a> <a href="/comments/<%=comment.id%>/edit">Edit or Delete</a> <%=comment.created_at%></li>
+  <% end %>
+<% end %>
+</ul>
+
+<h2> Comments on Answers </h2>
+<ul>
+<% @comments.each do |comment| %>
+  <% if comment.user_id == current_user && comment.commentable_type == "Answer" %>
+    <% question_id = Answer.find(comment.commentable_id).question.id %>
+    <li><a href="/questions/<%=question_id%>"><%= comment.text %></a> <a href="/comments/<%=comment.id%>/edit">Edit or Delete</a> <%=comment.created_at%></li>
   <% end %>
 <% end %>
 </ul>
