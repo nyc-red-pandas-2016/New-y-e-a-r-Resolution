@@ -41,8 +41,9 @@ end
 
  get '/users/profile/:id' do
   require_user
-  @questions= Question.all
-  @answers= Answer.all
-  @comments= Comment.all
+  @user_id = params[:id]
+  @questions= Question.where(user_id: @user_id)
+  @answers= Answer.where(user_id: @user_id)
+  @comments= Comment.where(user_id: @user_id)
   erb :'/users/profile'
 end
