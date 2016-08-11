@@ -11,27 +11,32 @@
   <!--
     application.css is where you put your styles
   -->
-  <link rel="stylesheet" href="/css/application.css">
-
+  <link rel="stylesheet" href="/css/profile.css">
+  <link rel="stylesheet" href="/css/nav.css">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="/js/application.js"></script>
+   <script src="/js/application.js"></script>
+   <script src="/js/profile.js"></script>
 
   <title></title>
-</head>
-<body>
-  <nav>
-    <ul>
-      <li><a href="/">Home</a></li>
+<nav>
+  <div id="home_icon">
+    <a class="top_button" id="home_button" href="/"> <img id="logo" src ="/logo.jpg" alt="it broke"/> </a>
+  </div>
+
+  <div id="top_row">
       <% if current_user %>
-        <li>View <a href="/users/profile/<%=current_user%>"><%= current_user_name %>'s</a> Profile</li>
-        <li><a href="/users/logout">Logout</a></li>
-        <li><a href="/questions/create">Create A Question!</a></li>
+        <a class="top_button" href="/users/profile/<%=current_user%>"><%= current_user_name %>'s Profile</a>
+        <a class="top_button" href="/questions/create">Create A Question!</a>
+        <a class="top_button" href="/users/logout">Logout</a>
       <% else %>
-        <li><a href="/users/new">Register</a></li>
-        <li><a href="/users/login">Login</a></li>
+        <a href="/users/new">Register</a>
+        <a href="/users/login">Login</a>
       <% end %>
-    </ul>
+    </div>
   </nav>
+</head>
+
+<body>
   <%= yield %>
 </body>
 </html>
