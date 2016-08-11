@@ -10,17 +10,34 @@ post '/answers/:id/comments/new' do
 end
 
 get '/answers/:id/upvote' do
-  answer = Answer.find(params[:id])
-  question_id = answer.question.id
-  answer.votes.create(user_id: current_user, value: 1)
-  redirect "/questions/#{question_id}"
+  if current_user
+    answer = Answer.find(params[:id])
+    question_id = answer.question.id
+    answer.votes.create(user_id: current_user, value: 1)
+    redirect "/questions/#{question_id}"
+  else
+    redirect '/users/login'
+  end
 end
 
 get '/answers/:id/downvote' do
+  if current_user
+    answer = Answer.find(params[:id])
+    question_id = answer.question.id
+    answer.votes.create(user_id: current_user, value: -1)
+    redirect "/questions/#{question_id}"
+  else
+    redirect '/users/login'
+  end
+end
+
+get '/answers/:id/best' do
   answer = Answer.find(params[:id])
-  question_id = answer.question.id
-  answer.votes.create(user_id: current_user, value: -1)
-  redirect "/questions/#{question_id}"
+  question = answer.question
+  question.answers.map! { |answer| answer.best = false}
+    answer.best = true
+    answer.save
+  redirect 'questions/#{question.id}'
 end
 
 get '/answers/:id/edit' do

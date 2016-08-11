@@ -1,7 +1,8 @@
 <h1> New Year Resolutions </h1>
 
 <ul><% @questions.each do |q| %>
-  <li>Views: <%=q.views %> Answers: <%=q.answers.length %> Votes: <%=q.count_votes %> Asked:<a href="/questions/<%= q.id %>"><%= q.title %> </a> User: <%= q.user.username%><br>
+  <li>Views: <%=q.views %> Answers: <%=q.answers.length %> Votes: <%=q.count_votes %> Asked:<a href="/questions/<%= q.id %>"><%= q.title %> </a> User: <%= q.user.username%><br> Time Since Creation <%= q.time_since_asked%> <br>
+    <!-- lets make the username a ahref to link to profile -->
     <% q.tags.each do |tag| %>
       <%= tag.name %>
     <% end %>
