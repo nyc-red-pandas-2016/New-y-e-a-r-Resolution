@@ -12,11 +12,6 @@ post '/questions/create' do
     end
   end
 
-  # tags.each do |tag|
-  #   QuestionTag.create(question_id: @question.id, tag_id: tag.id)
-  # end
-
-
   if question.save
     redirect '/'
   else
@@ -48,6 +43,13 @@ post '/questions/:id/edit' do
     @errors = questions.errors.full_messages
     erb :"/questions/#{@question.id}/edit"
   end
+end
+
+post '/questions/:id/delete' do
+  @question = Question.find(params[:id])
+  @question.destroy
+  @question.save
+  redirect "/users/profile/#{current_user}"
 end
 
 get '/questions/:id' do

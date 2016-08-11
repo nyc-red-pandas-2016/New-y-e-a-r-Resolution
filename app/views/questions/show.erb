@@ -5,9 +5,16 @@
   <p> <%= @question.body %> </p>
 </div>
 <div>
+  <% if @question.user_id != current_user %>
   <a href="/questions/<%=@question.id%>/upvote">Upvote!</a>
+  <% end %>
   <p>Current Votes: <%=@question.count_votes %></p>
+  <% if @question.user_id != current_user %>
   <a href="/questions/<%=@question.id%>/downvote">Downvote!</a>
+  <% end %>
+  <% if @question.user_id == current_user %>
+    <p><a href="/questions/<%=@question.id%>/edit">Edit Or Delete</a></p>
+  <% end %>
 </div>
 <h2> Comments on Question </h2>
 <h3> Add Comment </h3>
