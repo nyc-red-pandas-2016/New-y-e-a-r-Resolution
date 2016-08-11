@@ -19,13 +19,18 @@ get '/users/login' do
 end
 
 post '/users/login' do
-  @user= User.find_by(email: params[:user][:email])
-  if @user && @user.authenticate(params[:user][:password])
-    session[:user_id]= @user.id
-    redirect '/'
+  user = User.find_by(email: params[:user][:email])
+  if user
+    if user.authenticate(params[:user][:password])
+      session[:user_id] = user.id
+      redirect "/users/profile/#{user.id}"
+    else
+      @errors = ['Invalid password']
+      erb :'users/login'
+    end
   else
-    @errors= ["Cannot Log In With This Info"]
-    erb :'/users/login'
+    @errors = ['We do not recognize this email address']
+    erb :'users/login'
   end
 end
 

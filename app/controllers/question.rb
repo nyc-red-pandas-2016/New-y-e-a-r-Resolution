@@ -54,8 +54,11 @@ end
 
 get '/questions/:id' do
   @question = Question.find(params[:id])
-  @answers = @question.answers
+  best = @question.answers.where(best: true)
+  rest = @question.answers.where(best: false).sort_by{|an| an.count_votes}.reverse
+  @answers = best + rest
   @question.add_view
+  @best_enabled = true if @question.user.id == current_user
 
   erb :'questions/show'
 end
@@ -84,13 +87,21 @@ post '/questions/:id/answers/new' do
 end
 
 get '/questions/:id/upvote' do
-  question = Question.find(params[:id])
-  question.votes.create(user_id: current_user, value: 1)
-  redirect "/questions/#{question.id}"
+  if current_user
+    question = Question.find(params[:id])
+    question.votes.create(user_id: current_user, value: 1)
+    redirect "/questions/#{question.id}"
+  else
+    redirect '/users/login'
+  end
 end
 
 get '/questions/:id/downvote' do
-  question = Question.find(params[:id])
-  question.votes.create(user_id: current_user, value: -1)
-  redirect "/questions/#{question.id}"
+  if current_user
+    question = Question.find(params[:id])
+    question.votes.create(user_id: current_user, value: -1)
+    redirect "/questions/#{question.id}"
+  else
+    redirect '/users/login'
+  end
 end
