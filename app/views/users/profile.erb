@@ -31,7 +31,7 @@
 <ul>
 <% @comments.each do |comment| %>
   <% if comment.user_id == current_user && comment.commentable_type == "Answer" %>
-    question_id = Answer.find(comment.commentable_id).question.id
+    <% question_id = Answer.find(comment.commentable_id).question.id %>
     <li><a href="/questions/<%=question_id%>"><%= comment.text %></a> <a href="/comments/<%=comment.id%>/edit">Edit or Delete</a> <%=comment.created_at%></li>
   <% end %>
 <% end %>
