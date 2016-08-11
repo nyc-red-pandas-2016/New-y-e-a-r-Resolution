@@ -25,11 +25,19 @@ post '/users/login' do
     redirect '/'
   else
     @errors= ["Cannot Log In With This Info"]
-    erb :'users/login'
+    erb :'/users/login'
   end
 end
 
 get '/users/logout' do
   session.clear
   redirect '/'
+end
+
+ get '/users/profile/:id' do
+  require_user
+  @questions= Question.all
+  @answers= Answer.all
+  @comments= Comment.all
+  erb :'/users/profile'
 end
