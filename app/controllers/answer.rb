@@ -37,7 +37,11 @@ get '/answers/:id/best' do
   question.answers.map! { |answer| answer.best = false}
     answer.best = true
     answer.save
-  redirect 'questions/#{question.id}'
+  if request.xhr?
+    "<p>Best answer:</p>"
+  else
+    redirect 'questions/#{question.id}'
+  end
 end
 
 get '/answers/:id/edit' do

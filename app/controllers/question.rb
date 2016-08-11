@@ -89,8 +89,15 @@ end
 get '/questions/:id/upvote' do
   if current_user
     question = Question.find(params[:id])
-    question.votes.create(user_id: current_user, value: 1)
-    redirect "/questions/#{question.id}"
+    question.votes.new(user_id: current_user, value: 1)
+    if request.xhr? && question.save
+      content_type :json
+      {votes: question.count_votes}.to_json
+    elsif request.xhr?
+      status 400
+    else
+      redirect "/questions/#{question.id}"
+    end
   else
     redirect '/users/login'
   end
@@ -99,8 +106,15 @@ end
 get '/questions/:id/downvote' do
   if current_user
     question = Question.find(params[:id])
-    question.votes.create(user_id: current_user, value: -1)
-    redirect "/questions/#{question.id}"
+    question.votes.new(user_id: current_user, value: -1)
+    if request.xhr?
+      content_type :json
+      {votes: question.count_votes}.to_json
+    elsif request.xhr?
+      status 400
+    else
+      redirect "/questions/#{question.id}"
+    end
   else
     redirect '/users/login'
   end

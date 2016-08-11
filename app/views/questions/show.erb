@@ -6,25 +6,27 @@
   </ul>
 <% end %>
 
-<div>
+<div class ="question_container" id="<%= @question.id%>">
   <h1> <%= @question.title %> </h1>
   <p> <%= @question.user.username%></p>
   <br>
   <p> <%= @question.body %> </p>
 </div>
-<div>
+
+
+<div class="question_vote_container">
   <% if @question.user_id != current_user %>
-  <a href="/questions/<%=@question.id%>/upvote">Upvote!</a>
+  <a id="question_upvote" href="/questions/<%=@question.id%>/upvote">Upvote!</a>
   <% end %>
-  <p>Current Votes: <%=@question.count_votes %></p>
+  <p>Current Votes: <span id="current_votes"><%=@question.count_votes %></span></p>
   <% if @question.user_id != current_user %>
-  <a href="/questions/<%=@question.id%>/downvote">Downvote!</a>
+  <a id="question_downvote" href="/questions/<%=@question.id%>/downvote">Downvote!</a>
   <% end %>
   <% if @question.user_id == current_user %>
     <p><a href="/questions/<%=@question.id%>/edit">Edit Or Delete</a></p>
   <% end %>
 </div>
-<div>
+<div class="question_comment_container">
   <h2> Comments on Question </h2>
   <h3> Add Comment </h3>
   <form method="POST" action="/questions/<%= @question.id %>/comments/new">
@@ -40,21 +42,21 @@
   <hr>
 </div>
 
-<div>
+<div class="answers_container">
   <h2> Answers to Question </h2>
   <p> Total Answers <%= @answers.length %> </p>
   <% @answers.each do |answer| %>
     <% if answer.best %>
-      <p> THIS IS THE BEST!!!! </p>
+      <p id="is_best"> THIS IS THE BEST!!!! </p>
     <% end %>
-      <p> <%= answer.text %> <br >USERNAME: <%= answer.user.username%> </p>
+      <p class="answer_paragraph" id="<%=answer.id%>" <%= answer.text %> <br >USERNAME: <%= answer.user.username%> </p>
       <% if @best_enabled %>
-        <a href="/answers/<%=answer.id%>/best">Choose as Best Answer</a>
+        <a id="choose_best"href="/answers/<%=answer.id%>/best">Choose as Best Answer</a>
       <% end %>
     <div>
-      <a href="/answers/<%=answer.id%>/upvote">Upvote!</a>
+      <a id="answer_upvote" href="/answers/<%=answer.id%>/upvote">Upvote!</a>
       <p>Current Votes: <%=answer.count_votes %></p>
-      <a href="/answers/<%=answer.id%>/downvote">Downvote!</a>
+      <a id="answer_downvote"href="/answers/<%=answer.id%>/downvote">Downvote!</a>
     </div>
     <p> Comments </p>
     <% answer.comments.each do |comment| %>
