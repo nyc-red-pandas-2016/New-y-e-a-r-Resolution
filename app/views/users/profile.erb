@@ -4,7 +4,7 @@
 <ul>
   <% @questions.each do |question| %>
     <% if question.user_id== current_user %>
-      <li><a href="/questions/<%=question.id%>"><%= question.title %></a> <%=question.created_at%></li>
+      <li><a href="/questions/<%=question.id%>"><%= question.title %></a> <a href="/questions/<%=question.id%>/edit">Edit</a> <%=question.created_at%></li>
     <% end %>
   <% end %>
 </ul>

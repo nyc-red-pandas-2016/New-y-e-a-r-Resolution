@@ -4,18 +4,49 @@ end
 
 post '/questions/create' do
   question = Question.new(params[:question])
-  tags= params[:tags].split(' ')
+  tags = params[:tags].split(' ')
   if tags.length > 0
-    tags.each do |tag|
-      question.tags.new(:name => tag)
+    tags.map! do |tag|
+      new_tag = Tag.find_or_create_by(name: tag.capitalize)
+      question.tags << new_tag
     end
   end
+
+  # tags.each do |tag|
+  #   QuestionTag.create(question_id: @question.id, tag_id: tag.id)
+  # end
+
 
   if question.save
     redirect '/'
   else
     @errors = questions.errors.full_messages
     erb :'/questions/create'
+  end
+end
+
+get '/questions/:id/edit' do
+  @question = Question.find(params[:id])
+  @tag_names = @question.tags.map { |tag| tag.name }.join(' ')
+  erb :'questions/edit'
+end
+
+post '/questions/:id/edit' do
+  @question = Question.find(params[:id])
+  @question.update(params[:question])
+  @question.tags.destroy_all
+  tags = params[:tags].split(' ')
+  if tags.length > 0
+    tags.map! do |tag|
+      new_tag = Tag.find_or_create_by(name: tag.capitalize)
+      @question.tags << new_tag
+    end
+  end
+  if @question.save
+    redirect "/questions/#{@question.id}"
+  else
+    @errors = questions.errors.full_messages
+    erb :"/questions/#{@question.id}/edit"
   end
 end
 
