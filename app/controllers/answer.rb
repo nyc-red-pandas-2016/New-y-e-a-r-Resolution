@@ -33,14 +33,14 @@ end
 
 get '/answers/:id/best' do
   answer = Answer.find(params[:id])
-  question = answer.question
-  question.answers.map! { |answer| answer.best = false}
+  question = answer.question(answer)
+  question.answers.where(best: true).update_all(best: false)
     answer.best = true
     answer.save
   if request.xhr?
     "<p>Best answer:</p>"
   else
-    redirect 'questions/#{question.id}'
+    redirect "questions/#{question.id}"
   end
 end
 
