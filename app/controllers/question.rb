@@ -68,8 +68,12 @@ post '/questions/:id/comments/new' do
 
   if current_user
     question = Question.find(params[:id])
-    question.comments.create(text: params[:text], user_id: current_user)
-    redirect "/questions/#{question.id}"
+    comment = question.comments.create(text: params[:text], user_id: current_user)
+    if request.xhr?
+      erb :'comments/_new_comment', locals:{comment: comment}, layout: false
+    else
+      redirect "/questions/#{question.id}"
+    end
   else
     redirect '/users/login'
   end
