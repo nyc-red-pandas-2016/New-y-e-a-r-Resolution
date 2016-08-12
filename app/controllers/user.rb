@@ -41,6 +41,7 @@ end
 
  get '/users/profile/:id' do
   require_user
+  @user = User.find(params[:id])
   @user_id = params[:id]
   @questions= Question.where(user_id: @user_id)
   @answers= Answer.where(user_id: @user_id)
