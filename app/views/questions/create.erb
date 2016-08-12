@@ -1,14 +1,14 @@
 <div class="container">
   <h1>Create a Question</h1>
   <form action="/questions/create" method="post" class="register_form">
-    <label for="question[title]">Title:</label>
-    <input type="text" name="question[title]"><br>
-    <label for="question[body]">Body:</label>
-    <input type="text" name="question[body]"><br>
-    <label for="tags">Add Tags:</label>
-    <input type="text" name="tags"><br>
+    <label for="question[title]">Title:</label><br>
+    <textarea rows="1" cols="50" name="question[title]"> </textarea><br><br>
+    <label for="question[body]">Body:</label><br>
+    <textarea rows="10" cols="50" name="question[body]"> </textarea><br><br>
+    <label for="tags">Add Tags:</label><br>
+    <textarea rows="3" cols="50" name="tags"> </textarea><br><br>
     <input type="hidden" name="question[user_id]" value="<%= current_user %>">
 
-    <input type="submit" value="Submit Question" class="submit_button">
+    <input type="submit" value="Submit Question" class="top_button">
   </form>
 </div>
