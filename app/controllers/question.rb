@@ -20,21 +20,36 @@ post '/questions/create' do
   end
 end
 
-get '/questions/search' do
-  erb :'/questions/search'
-end
 
 post '/questions/search' do
 
   search_array= params[:searchtext].split(' ')
-  @questions= []
+  @questions = []
+  @errors = []
   search_array.each do |text|
-    found_name = text if User.find_by(username: text)
-    if found_name
+
+    if User.find_by(username: text)
+      found_name = text
       @found_id = User.find_by(username: found_name).id
+
+    elsif Tag.find_by(name: text)
+      questions= Tag.where(name: text)[0].questions
+
+      questions.each do |question|
+        @questions << question if !@questions.include?(question)
+      end
+
+    else
+      @errors << "Your search did not match any of our users or tags."
     end
+
   end
+
+  if @found_id
     redirect "/users/profile/#{@found_id}"
+  else
+    erb :index
+  end
 
 end
 

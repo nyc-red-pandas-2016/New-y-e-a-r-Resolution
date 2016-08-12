@@ -16,7 +16,7 @@
       <% @questions.each do |question| %>
         <li><a href="/questions/<%=question.id%>"><%= question.title %></a>
         <% if question.user_id== current_user %>
-           <a href="/questions/<%=question.id%>/edit">Edit</a>
+           <a class="top_button" href="/questions/<%=question.id%>/edit">Edit or Delete</a>
         <% end %>
          <%=question.time_since_asked%></li>
       <% end %>
@@ -29,7 +29,7 @@
       <% @answers.each do |answer| %>
           <li><a href="/questions/<%=answer.question_id%>"><%= answer.text %></a>
           <% if answer.user_id== current_user %>
-            <a href="/answers/<%=answer.id%>/edit">Edit or Delete</a>
+            <a class="top_button" href="/answers/<%=answer.id%>/edit">Edit or Delete</a>
           <% end %>
           <%=answer.time_since_asked%></li>
       <% end %>
@@ -43,7 +43,7 @@
         <% if comment.commentable_type == "Question" %>
           <li><a href="/questions/<%=comment.commentable_id%>"><%= comment.text %></a>
             <% if comment.user_id == current_user %>
-              <a href="/comments/<%=comment.id%>/edit">Edit or Delete</a>
+              <a class="top_button" href="/comments/<%=comment.id%>/edit">Edit or Delete</a>
             <% end %>
             <%=comment.time_since_asked%></li>
         <% end %>
@@ -57,7 +57,7 @@
         <% question_id = Answer.find(comment.commentable_id).question.id %>
         <li><a href="/questions/<%=question_id%>"><%= comment.text %></a>
           <% if comment.user_id == current_user %>
-            <a href="/comments/<%=comment.id%>/edit">Edit or Delete</a>
+            <a class="top_button" href="/comments/<%=comment.id%>/edit">Edit or Delete</a>
           <% end %>
           <%=comment.time_since_asked%></li>
       <% end %>
