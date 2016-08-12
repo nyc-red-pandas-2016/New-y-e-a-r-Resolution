@@ -1,7 +1,7 @@
 #homerow {
   background-color: #4E9CAF;
   width: 100%;
-  height: 100px;
+  height: 140px;
   margin: auto;
 }
 
@@ -12,17 +12,21 @@
 }
 
 #search_bar {
+  position: relative;
   display: inline-block;
-  margin-top: 20px;
-  width: 30%;
+  /*margin-top: 20px;*/
+  max-width: 300px;
   text-align: center;
   text-decoration: none;
+  bottom: 8px;
 }
 
 
 #top_row {
   display: inline-block;
-  width: 40%;
+  height: 40px;
+  float: right;
+  width: 400px;
   text-align: center;
   position: relative;
   top: -4px;
@@ -31,25 +35,22 @@
 
 #search_button {
   display: inline-block;
-  position: relative;
-  top: -7px;
   text-decoration: none;
   background: #4E9CAF;
   text-align: center;
   border-radius: 5px;
-
-
   color: white;
+  float: left;
 }
 
 #search_area {
-  display: inline;
-  bottom: 0;
+
+  width: 200px;
 }
 
 #logo {
-  height: 75px;
-  width: 75px;
+  height: 110px;
+  width: 110px;
 }
 
 .top_button{
