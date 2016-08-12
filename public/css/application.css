@@ -1,15 +1,4 @@
 
-body {
-  counter-reset:section;
-  background-color: #F6F6EF;
-  font-family: Verdana;
-  width: 600px;
-  margin: 0 auto;
-
-}
-
-
-
 #q_nav {
   margin:0px;
   list-style: none;
