@@ -1,46 +1,27 @@
-<div class="container">
-<h1> New Year Resolutions </h1>
+<div id="question_container">
 
-  <% @questions.each do |q| %>
-    <div class="actual_question">
 
-      <div class="question_and_attr">
 
-        <div class="attributes_container">
-           <p class="number_container"><%=q.views %> </p>
-           <p class="attribute_description">Views</p>
-        </div>
 
-        <div class="attributes_container">
-          <p class="number_container">  <%=q.answers.length %></p>
-          <p class="attribute_description">Answers</p>
-        </div>
 
-        <div class="attributes_container">
-          <p class="number_container"><%=q.count_votes %></p>
-          <p class="attribute_description"> Votes </p>
-        </div>
+  <div class="second-nav">
+    <nav>
 
-        <div class="q_container">
-          <a class="the_q" href="/questions/<%= q.id %>"><h2><%= q.title %> </h2></a>
-        </div>
-      </div>
+      <span id="title" class="q_li"> New Year Resolutions </span>
 
-      <div class="bottom_attr">
-        <div class="tag_container">
-          <% q.tags.each do |tag| %>
-            <p class="the_tag"> <%= tag.name %> </p>
-          <% end %>
-        </div>
+      <ul id="q_nav">
+        <li id="newest_id" class="q_li"> <a href="/questions/newest"> New </a> </li>
+        <li id="popular_id" class="q_li" > <a href="/questions/popular"> popular </a> </li>
+        <li id="worst_id" class="q_li"> <a href="/questions/worst" > Worst </a></li>
+      </ul>
 
-        <div class="time_container">
-           <%= q.time_since_asked%>
-        </div>
+    </nav>
+  </div>
 
-        <div class="user_container">
-          <a href="/users/profile/<%= q.user.id%>"><%= q.user.username%></a>
-        </div>
-      </div>
-    </div>
-  <% end %>
+
+  <div id="all_the_questions">
+    <%= erb :all_questions, locals: { questions: @questions } %>
+  <div>
+
+
 </div>
