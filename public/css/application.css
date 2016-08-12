@@ -8,6 +8,70 @@ body {
 
 }
 
+
+
+#q_nav {
+  margin:0px;
+  list-style: none;
+  float: right;
+}
+
+.second-nav{
+  padding:10px;
+  border-bottom: 2px solid black;
+  overflow:hidden;
+}
+.q_li {
+  display: inline;
+  float: left;
+}
+
+#title{
+  float: left;
+}
+
+.q_li a {
+  padding: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #question_container {
   /*border: 2px solid black;*/
   width: 1000px;
@@ -16,7 +80,7 @@ body {
 
 .actual_question {
   /*border: 2px solid black;*/
-  border-top: 2px solid grey;
+  border-bottom: 2px solid grey;
   margin: 5px;
 }
 
@@ -90,4 +154,10 @@ header p {
 
 .bottom_attr {
   border :2px  ;
+}
+
+.the_q h2 {
+  /*border: 2px solid black;*/
+
+  padding-left: 10px;
 }
