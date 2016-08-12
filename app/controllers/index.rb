@@ -31,3 +31,21 @@ get '/questions/worst' do
     erb :index
   end
 end
+
+
+get '/questions/by/tag/:id' do
+  @questions = Tag.find(params[:id]).questions
+
+ erb :index
+end
+
+
+
+get '/tags' do
+  # @tags = Tag.all.pluck(:name)
+    @tags = Tag.all
+    puts @tags.to_json
+  if request.xhr?
+    @tags.to_json
+  end
+end

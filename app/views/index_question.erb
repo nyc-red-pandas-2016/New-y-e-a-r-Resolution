@@ -25,16 +25,18 @@
   <div class="bottom_attr">
     <div class="tag_container">
       <% q.tags.each do |tag| %>
-        <p class="the_tag"> <%= tag.name %> </p>
+        <p class="the_tag"><a href="/questions/by/tag/<%=tag.id%>"> <%= tag.name %> <a/> </p>
       <% end %>
     </div>
 
-    <div class="time_container">
-       <%= q.time_since_asked%>
-    </div>
 
     <div class="user_container">
       <a href="/users/profile/<%= q.user.id%>"><%= q.user.username%></a>
     </div>
+    <div class="time_container">
+       <%= q.time_since_asked%>
+    </div>
+
+
   </div>
 </div>

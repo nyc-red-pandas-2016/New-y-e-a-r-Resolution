@@ -43,4 +43,22 @@ $(document).ready(function() {
 
 
 
+      $.ajax({
+        url: '/tags'
+      }).done(function(response){
+
+        var results = JSON.parse(response).map(function(element) {
+          return element.name;
+        })
+
+
+        $("#search_area").autocomplete({
+          source: results,
+          change: function( event, ui) {
+          }
+        });
+      });
+
+
+
 });
