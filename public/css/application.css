@@ -18,6 +18,7 @@ body {
 
 .second-nav{
   padding:10px;
+  /*padding-bottom:0px;*/
   border-bottom: 2px solid black;
   overflow:hidden;
 }
@@ -32,11 +33,18 @@ body {
 
 .q_li a {
   padding: 5px;
+  text-decoration: none;
 }
 
+.super_random {
+  border-right: 2px solid black;
+  border-left: 2px solid black;
+  border-top: 2px solid black;
+}
 
-
-
+a:hover {
+  color: purple;
+}
 
 
 

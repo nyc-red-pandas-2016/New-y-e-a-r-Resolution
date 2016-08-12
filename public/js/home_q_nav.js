@@ -2,6 +2,10 @@ $(document).ready(function() {
 
   $("#newest_id").on("click", function(e) {
     e.preventDefault();
+    // debugger
+    $(e.target).addClass('super_random');
+    $("#popular_id a").removeClass('super_random');
+    $("#worst_id a").removeClass('super_random');
     $.ajax({
       url: $(e.target).attr('href')
     }).done(function(response){
@@ -12,6 +16,9 @@ $(document).ready(function() {
 
   $("#popular_id").on("click", function(e){
     e.preventDefault();
+    $(e.target).addClass('super_random');
+    $("#newest_id a").removeClass('super_random');
+    $("#worst_id a").removeClass('super_random');
     $.ajax({
       url: $(e.target).attr('href')
     }).done(function(response){
@@ -23,6 +30,9 @@ $(document).ready(function() {
 
   $("#worst_id").on("click", function(e){
     e.preventDefault();
+    $(e.target).addClass('super_random');
+    $("#popular_id a").removeClass('super_random');
+    $("#newest_id a").removeClass('super_random');
     $.ajax({
       url: $(e.target).attr('href')
     }).done(function(response){
