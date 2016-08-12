@@ -20,6 +20,25 @@ post '/questions/create' do
   end
 end
 
+get '/questions/search' do
+  erb :'/questions/search'
+end
+
+post '/questions/search' do
+
+  search_array= params[:searchtext].split(' ')
+  @questions= []
+  search_array.each do |text|
+    found_name = text if User.find_by(username: text)
+    if found_name
+      @found_id = User.find_by(username: found_name).id
+    end
+  end
+    redirect "/users/profile/#{@found_id}"
+
+end
+
+
 get '/questions/:id/edit' do
   @question = Question.find(params[:id])
   @tag_names = @question.tags.map { |tag| tag.name }.join(' ')

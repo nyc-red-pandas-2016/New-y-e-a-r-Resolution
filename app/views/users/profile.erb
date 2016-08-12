@@ -18,7 +18,7 @@
         <% if question.user_id== current_user %>
            <a href="/questions/<%=question.id%>/edit">Edit</a>
         <% end %>
-         <%=question.created_at%></li>
+         <%=question.time_since_asked%></li>
       <% end %>
     </ul>
   </div>
@@ -31,7 +31,7 @@
           <% if answer.user_id== current_user %>
             <a href="/answers/<%=answer.id%>/edit">Edit or Delete</a>
           <% end %>
-          <%=answer.created_at%></li>
+          <%=answer.time_since_asked%></li>
       <% end %>
     </ul>
   </div>
@@ -45,7 +45,7 @@
             <% if comment.user_id == current_user %>
               <a href="/comments/<%=comment.id%>/edit">Edit or Delete</a>
             <% end %>
-            <%=comment.created_at%></li>
+            <%=comment.time_since_asked%></li>
         <% end %>
       <% end %>
       </ul>
@@ -59,7 +59,7 @@
           <% if comment.user_id == current_user %>
             <a href="/comments/<%=comment.id%>/edit">Edit or Delete</a>
           <% end %>
-          <%=comment.created_at%></li>
+          <%=comment.time_since_asked%></li>
       <% end %>
     <% end %>
     </ul>
