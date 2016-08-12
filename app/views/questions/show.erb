@@ -21,7 +21,7 @@
       <p> <%= @question.body %> </p>
     </div>
 
-    <div class="vote_container">
+    <div id="q_vote_container" class="vote_container" >
       <% if @question.user_id != current_user %>
       <a id="question_upvote" href="/questions/<%=@question.id%>/upvote"><img src="/images/upvote.png"></img></a>
       <p><span id="current_votes"><%=@question.count_votes %></span></p>
@@ -32,13 +32,14 @@
 
 
   <div class="comment_container">
-    <form class="comment_form" method="POST" action="/questions/<%= @question.id %>/comments/new">
+    <form class="comment_form q_comment_form" method="POST" action="/questions/<%= @question.id %>/comments/new">
       <input class="top_button" class="submit_button" type="submit" value="Add Comment">
       <input class="comment_field" type="text" name="text"> </input>
     </form>
-    <ul class="comment_list">
+    <ul class="comment_list q_comment_list">
       <% @question.comments.each do |comment| %>
-        <li class="comment"><%= comment.text %> - <a href="/users/profile/<%= comment.user_id%>"><%= comment.user.username%></a></li>      <% end %>
+      <%= erb :'comments/_new_comment', locals:{comment: comment}%>
+      <% end %>
     </ul>
   </div>
 
@@ -50,10 +51,13 @@
     <% end %>
   </div>
 
-      <% @answers.each do |answer| %>
+
+  <% @answers.each do |answer| %>
+  <div class="answer_vote_comment" id="<%=answer.id%>">
+
 
     <div class="q_a_container">
-        <p class="answer_paragraph" id="<%=answer.id%>"> <%= answer.text %> - <a href="/users/profile/<%= answer.user_id%>"> <%= answer.user.username%> </a> </p>
+        <p class="answer_paragraph"> <%= answer.text %> - <a href="/users/profile/<%= answer.user_id%>"> <%= answer.user.username%> </a> </p>
     </div>
 
     <div class ="vote_container">
@@ -65,14 +69,14 @@
       <% end %>
 
         <a id="answer_upvote" href="/answers/<%=answer.id%>/upvote"><img src="/images/upvote.png"></img></a>
-        <p><%=answer.count_votes %></p>
+        <p><span class="current_votes"><%=answer.count_votes %></span></p>
         <a id="answer_downvote"href="/answers/<%=answer.id%>/downvote"><img src="/images/downvote.png"></img></a>
     </div>
 
     <div class="comment_container">
       <% answer.comments.each do |comment| %>
         <ul class="comment_list">
-          <li class="comment"><%= comment.text %> - <a href="users/profile/<%= comment.user_id%>"><%= comment.user.username%></a></li>
+      <%= erb :'comments/_new_comment', locals:{comment: comment}%>
         </ul>
         <% end %>
         <form class="comment_form" method="POST" action="/answers/<%= answer.id %>/comments/new">
@@ -82,7 +86,9 @@
 
     </div>
 
-    <% end %>
+  </div>
+  <% end %>
+
 
 
 

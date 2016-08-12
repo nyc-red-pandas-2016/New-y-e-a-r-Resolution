@@ -14,7 +14,14 @@ get '/answers/:id/upvote' do
     answer = Answer.find(params[:id])
     question_id = answer.question.id
     answer.votes.create(user_id: current_user, value: 1)
-    redirect "/questions/#{question_id}"
+    if request.xhr? && answer.save
+      content_type :json
+      {votes: answer.count_votes}.to_json
+    elsif request.xhr?
+      status 400
+    else
+      redirect "/questions/#{question_id}"
+    end
   else
     redirect '/users/login'
   end
@@ -24,8 +31,15 @@ get '/answers/:id/downvote' do
   if current_user
     answer = Answer.find(params[:id])
     question_id = answer.question.id
-    answer.votes.create(user_id: current_user, value: -1)
-    redirect "/questions/#{question_id}"
+    answer.votes.new(user_id: current_user, value: -1)
+    if request.xhr? && answer.save
+      content_type :json
+      {votes: answer.count_votes}.to_json
+    elsif request.xhr?
+      status 400
+    else
+      redirect "/questions/#{question_id}"
+    end
   else
     redirect '/users/login'
   end
@@ -37,11 +51,7 @@ get '/answers/:id/best' do
   question.answers.where(best: true).update_all(best: false)
     answer.best = true
     answer.save
-  if request.xhr?
-    "<p>Best answer:</p>"
-  else
     redirect "questions/#{question.id}"
-  end
 end
 
 get '/answers/:id/edit' do
