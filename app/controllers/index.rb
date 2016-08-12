@@ -31,3 +31,10 @@ get '/questions/worst' do
     erb :index
   end
 end
+
+
+get '/questions/by/tag/:id' do
+  @questions = Tag.find(params[:id]).questions
+
+ erb :index
+end
