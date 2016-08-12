@@ -38,10 +38,19 @@ a:hover {
 
 
 
+
+
+
+
+
+
+
+
 #question_container {
   /*border: 2px solid black;*/
   width: 1000px;
   margin: auto;
+  margin-top: 75px;
 }
 
 .actual_question {
@@ -56,6 +65,8 @@ a:hover {
   display: inline-block;
   /*border: 2px solid black;*/
   margin: 8px;
+  height: 60px;
+  width: 50px;
 }
 
 header p {
@@ -89,6 +100,12 @@ header p {
   display: inline-block;
   /*border: 2px solid black;*/
   margin: 8px;
+  float: right;
+}
+
+.user_container a {
+  text-decoration: none;
+
 }
 
 .time_container {
@@ -97,6 +114,7 @@ header p {
   margin: 8px;
   margin-right: 0;
   /*margin-left: 300px;*/
+  float: right;
 }
 
 .tag_container {
@@ -104,13 +122,21 @@ header p {
   /*border: 2px solid black;*/
   margin: 8px;
   margin-left:210px;
-  width: 450px;
+  width: 470px;
   margin-top: 0px;
 }
 
 .the_tag {
   display: inline-block;
-  background: lightblue;
+  background: #4E9CAF;
+  color: white;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.the_tag a{
+  text-decoration:none;
+  color: white;
 }
 
 .question_and_attr {
