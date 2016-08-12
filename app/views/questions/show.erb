@@ -38,7 +38,7 @@
     </form>
     <ul class="comment_list">
       <% @question.comments.each do |comment| %>
-        <li class="comment"><%= comment.text %> - <a href="users/profile/<%= comment.user_id%>"><%= comment.user.username%></a></li>      <% end %>
+        <li class="comment"><%= comment.text %> - <a href="/users/profile/<%= comment.user_id%>"><%= comment.user.username%></a></li>      <% end %>
     </ul>
   </div>
 
