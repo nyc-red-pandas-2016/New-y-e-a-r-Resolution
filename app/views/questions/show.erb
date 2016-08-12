@@ -55,7 +55,6 @@
   <% @answers.each do |answer| %>
   <div class="answer_vote_comment" id="<%=answer.id%>">
 
-
     <div class="q_a_container">
         <p class="answer_paragraph"> <%= answer.text %> - <a href="/users/profile/<%= answer.user_id%>"> <%= answer.user.username%> </a> </p>
     </div>
@@ -74,12 +73,12 @@
     </div>
 
     <div class="comment_container">
+      <ul class="comment_list a_comment_list">
       <% answer.comments.each do |comment| %>
-        <ul class="comment_list">
-      <%= erb :'comments/_new_comment', locals:{comment: comment}%>
-        </ul>
-        <% end %>
-        <form class="comment_form" method="POST" action="/answers/<%= answer.id %>/comments/new">
+        <%= erb :'comments/_new_comment', locals:{comment: comment}%>
+      <% end %>
+      </ul>
+        <form class="comment_form a_comment_form" method="POST" action="/answers/<%= answer.id %>/comments/new">
           <input class="top_button" class="submit_button" type="submit" value="Add Comment">
           <input class="comment_field" type="text" name="text"> </input>
         </form>

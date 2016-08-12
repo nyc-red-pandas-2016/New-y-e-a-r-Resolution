@@ -72,8 +72,21 @@ $(document).ready(function() {
         data: $(event.target).serialize()
       }).done(function(response) {
         $(".q_comment_list").append(response);
+        $(".comment_field").val('');
       });
 
     });
 
+  $('.answer_vote_comment').on("submit", '.a_comment_form', function(event) {
+    event.preventDefault();
+    var answerID = $(this).closest('.answer_vote_comment').attr('id');
+    $.ajax({
+      method: $(event.target).attr("method"),
+      url: "/answers/" + answerID + "/comments/new",
+      data: $(event.target).serialize()
+      }).done(function(response) {
+        $(".a_comment_list").append(response);
+        $(".comment_field").val('');
+      });
+    });
 });
